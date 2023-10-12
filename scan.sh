@@ -101,6 +101,11 @@ function check_dependencies {
     fi
 }
 
+# Sanitize filename
+function sanitize_filename {
+    FILENAME=${FILENAME// /_}
+}
+
 # Create Temporary directory
 function create_tmp_dir {
     TMP_DIR=${OUTDIR}/${SCRIPT_NAME}-tmp
@@ -236,6 +241,10 @@ check_dependencies
 
 # Create temporary dir where scans are saved and manipulated
 create_tmp_dir
+
+# Sanitize filename, replace spaces with underscore
+sanitize_filename
+echo ${FILENAME}
 
 # Scan pages in batch mode
 echo "[INFO] Starts Scanimage..."
