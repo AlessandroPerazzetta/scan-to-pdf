@@ -43,4 +43,4 @@ try to install sane-airscan (https://github.com/alexpevzner/sane-airscan) to ena
     - output: output directory where save temporary files and final PDF
 
 ## Example:
-`./scan.sh eboook 12 ./out 300 30 gray`
+`./scan.sh 12 300 30 gray ./out eboook`
