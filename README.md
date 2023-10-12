@@ -42,5 +42,7 @@ try to install sane-airscan (https://github.com/alexpevzner/sane-airscan) to ena
     - filename: file name of the final PDF
     - output: output directory where save temporary files and final PDF
 
-## Example:
-`./scan.sh 12 300 30 gray ./out eboook`
+## Examples:
+`./scan.sh 12 300 30 gray ./out ebook`
+
+`./scan.sh 2 600 20 color /out 'sample with long name'`
