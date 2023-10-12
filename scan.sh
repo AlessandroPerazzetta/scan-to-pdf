@@ -46,7 +46,7 @@ TESS_LANG=eng  #Language that Tesseract uses for OCR
 
 # Show program usage
 function show_usage {
-    echo -e "\nUsage: \t $0 filename pages output dpi brightness color|gray"
+    echo -e "\nUsage: \t $0 pages dpi brightness color|gray output filename"
 }
 
 # Check dependencies
@@ -192,7 +192,11 @@ elif [ $# -eq 1 ] && [ $1 == "-v" ]; then
 else
     if [ "$1" ]
     then
-        FILENAME=$1
+        re='^[0-9]+$'  #Check if second argument is a number
+        if ! [[ ${1} =~ $re ]] ; then
+            show_usage >&2; exit 1
+        fi
+        PAGES=$1
     fi
 
     if [ "$2" ]
@@ -201,38 +205,34 @@ else
         if ! [[ ${2} =~ $re ]] ; then
             show_usage >&2; exit 1
         fi
-        PAGES=$2
+        DPI=$2
     fi
 
     if [ "$3" ]
     then
-        OUTDIR=$3
+        re='^[0-9]+$'  #Check if second argument is a number
+        if ! [[ ${3} =~ $re ]] ; then
+            show_usage >&2; exit 1
+        fi
+        BRIGHTNESS=$3
     fi
 
     if [ "$4" ]
     then
-        re='^[0-9]+$'  #Check if second argument is a number
-        if ! [[ ${4} =~ $re ]] ; then
+        if ! [[ ${4} == "color" || ${4} == "gray" ]] ; then
             show_usage >&2; exit 1
         fi
-        DPI=$4
+        MODE=$4
     fi
-
+    
     if [ "$5" ]
     then
-        re='^[0-9]+$'  #Check if second argument is a number
-        if ! [[ ${5} =~ $re ]] ; then
-            show_usage >&2; exit 1
-        fi
-        BRIGHTNESS=$5
+        OUTDIR=$5
     fi
-
+    
     if [ "$6" ]
     then
-        if ! [[ ${6} == "color" || ${6} == "gray" ]] ; then
-            show_usage >&2; exit 1
-        fi
-        MODE=$6
+        FILENAME=$6
     fi
 fi
 
