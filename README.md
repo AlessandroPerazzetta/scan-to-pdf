@@ -27,11 +27,9 @@ try to install sane-airscan (https://github.com/alexpevzner/sane-airscan) to ena
     device `airscan:e0:EPSON ET-2850 Series' is a eSCL EPSON ET-2850 Series ip=192.168.1.3
 
 # Usage:
-`scan.sh filename pages output dpi brightness color|gray`
+`scan.sh pages dpi brightness color|gray output filename`
 
-    - filename: file name of the final PDF
     - pages: number of pages to scan
-    - output: output directory where save temporary files and final PDF
     - dpi: resolution, values available (refer printer capabilities): 
             75
             150
@@ -41,6 +39,8 @@ try to install sane-airscan (https://github.com/alexpevzner/sane-airscan) to ena
             600
     - brightness: -100 ... 100 percent (40 default)
     - color|gray: acquisition mode, color or gray
+    - filename: file name of the final PDF
+    - output: output directory where save temporary files and final PDF
 
 ## Example:
 `./scan.sh eboook 12 ./out 300 30 gray`
