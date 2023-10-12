@@ -12,7 +12,7 @@ Scan multiple pages and merge to a PDF
 - pdfunite (for merging scanned pages into PDF)
 
 # Notes:
-Use scanimage -L to get a list of devices.
+Use `scanimage -L` to get a list of devices.
     e.g. device `epson2:net:192.168.1.3' is a Epson PID flatbed scanner
 
 set SCANNER with epson2:net:192.168.1.3
