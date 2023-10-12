@@ -149,54 +149,86 @@ function merge_pages {
 }
 
 # Check arguments
-if [ $# -eq 0 ]
-then
+if [ $# -eq 0 ]; then
     echo "[ERROR] No arguments supplied"
+    # show_usage >&2; exit 1
+
+    read -p "Final PDF Filename: " FILENAME
+    
+    while ! [[ "$input_pages" =~ ^[0-9]+$ ]] 
+    do
+        read -p "Pages to scan: " input_pages
+    done
+    PAGES=${input_pages}
+    
+    read -p "Output directory: " OUTDIR
+    
+    while ! [[ "$input_dpi" =~ ^[0-9]+$ ]] 
+    do
+        read -p "DPI scan setting (75..600): " input_dpi
+    done
+    DPI=${input_dpi}
+
+    while ! [[ "$input_brightness" =~ ^[0-9]+$ ]]
+    do
+        read -p "Brightness scan setting (-100..100): " input_brightness
+    done
+    BRIGHTNESS=${input_brightness}
+    
+    while ! [[ "$input_mode" =~ ^(color|gray)$ ]] 
+    do
+        read -p "Mode scan setting (color|gray): " input_mode
+    done
+    MODE=${input_mode}
+
+    read -p "Continue? (Y/N): " confirm && [[ $confirm == [yY] || $confirm == [yY][eE][sS] ]] || exit 1
+elif [ $# -eq 1 ] && [ $1 == "-v" ]; then
     show_usage >&2; exit 1
-fi
-if [ "$1" ]
-then
-    FILENAME=$1
-fi
-
-if [ "$2" ]
-then
-    re='^[0-9]+$'  #Check if second argument is a number
-    if ! [[ ${2} =~ $re ]] ; then
-        show_usage >&2; exit 1
+else
+    if [ "$1" ]
+    then
+        FILENAME=$1
     fi
-    PAGES=$2
-fi
 
-if [ "$3" ]
-then
-    OUTDIR=$3
-fi
-
-if [ "$4" ]
-then
-    re='^[0-9]+$'  #Check if second argument is a number
-    if ! [[ ${4} =~ $re ]] ; then
-        show_usage >&2; exit 1
+    if [ "$2" ]
+    then
+        re='^[0-9]+$'  #Check if second argument is a number
+        if ! [[ ${2} =~ $re ]] ; then
+            show_usage >&2; exit 1
+        fi
+        PAGES=$2
     fi
-    DPI=$4
-fi
 
-if [ "$5" ]
-then
-    re='^[0-9]+$'  #Check if second argument is a number
-    if ! [[ ${5} =~ $re ]] ; then
-        show_usage >&2; exit 1
+    if [ "$3" ]
+    then
+        OUTDIR=$3
     fi
-    BRIGHTNESS=$5
-fi
 
-if [ "$6" ]
-then
-    if ! [[ ${6} == "color" || ${6} == "gray" ]] ; then
-        show_usage >&2; exit 1
+    if [ "$4" ]
+    then
+        re='^[0-9]+$'  #Check if second argument is a number
+        if ! [[ ${4} =~ $re ]] ; then
+            show_usage >&2; exit 1
+        fi
+        DPI=$4
     fi
-    MODE=$6
+
+    if [ "$5" ]
+    then
+        re='^[0-9]+$'  #Check if second argument is a number
+        if ! [[ ${5} =~ $re ]] ; then
+            show_usage >&2; exit 1
+        fi
+        BRIGHTNESS=$5
+    fi
+
+    if [ "$6" ]
+    then
+        if ! [[ ${6} == "color" || ${6} == "gray" ]] ; then
+            show_usage >&2; exit 1
+        fi
+        MODE=$6
+    fi
 fi
 
 # Check if dependencies are satisfied
