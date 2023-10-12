@@ -125,7 +125,7 @@ function convert_tiff_to_pdf {
     # Cycle all tif files in TMP_DIR and convert into PDF
     for file in *.tif
     do
-        tesseract $file  ${file%.tif} -l ${TESS_LANG} pdf
+        tesseract $file ${file%.tif} -l ${TESS_LANG} pdf
     done    
 }
 
