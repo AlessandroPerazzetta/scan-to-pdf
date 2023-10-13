@@ -39,7 +39,7 @@ OUTDIR=/tmp
 SCANNER="airscan:e0:EPSON ET-2850 Series"   #EPSON ET-2850 eSCL scanner
 
 DPI=300
-BRIGHTNESS=40   #Brightness to remove paper look
+BRIGHTNESS=10   #Brightness to remove paper look
 MODE=color
 
 TESS_LANG=eng  #Language that Tesseract uses for OCR

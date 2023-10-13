@@ -37,7 +37,7 @@ try to install sane-airscan (https://github.com/alexpevzner/sane-airscan) to ena
             300 (default)
             400
             600
-    - brightness: -100 ... 100 percent (40 default)
+    - brightness: -100 ... 100 percent (10 default)
     - color|gray: acquisition mode, color or gray
     - filename: file name of the final PDF
     - output: output directory where save temporary files and final PDF
