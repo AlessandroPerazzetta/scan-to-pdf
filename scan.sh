@@ -245,7 +245,7 @@ create_tmp_dir
 
 # Sanitize filename, replace spaces with underscore
 sanitize_filename
-echo ${FILENAME}
+echo "[INFO] New sanitized filename: ${FILENAME}"
 
 # Scan pages in batch mode
 echo "[INFO] Starts Scanimage..."
