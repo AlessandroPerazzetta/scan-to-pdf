@@ -108,7 +108,8 @@ function sanitize_filename {
 
 # Create Temporary directory
 function create_tmp_dir {
-    TMP_DIR=${OUTDIR}/${SCRIPT_NAME}-tmp
+    RND_PATH_ID=$(( RANDOM % 10000 ))
+    TMP_DIR=${OUTDIR}/${SCRIPT_NAME}-tmp-${RND_PATH_ID}
 
     if [ -d ${TMP_DIR} ]  #Check if it exists a directory already
     then
