@@ -57,32 +57,35 @@ function check_dependencies {
 
     OS=$(uname -s | tr A-Z a-z)
     case $OS in
-    linux)
-        source /etc/os-release
-        case $ID_LIKE in
-        debian|ubuntu|mint)
-            missingdepsinstall="sudo apt install"
+        linux)
+            source /etc/os-release
+            OS_ID=""
+            if [ -z "$ID_LIKE" ];then
+                OS_ID=$ID
+            else
+                OS_ID=$ID_LIKE
+            fi
+            case $OS_ID in
+            *debian*|*ubuntu*|*mint*)
+                missingdepsinstall="sudo apt install"
+                ;;
+            *fedora*|*rhel*|*centos*)
+                missingdepsinstall="sudo dnf install"
+                ;;
+            *arch*)
+                missingdepsinstall="yay -S"
+                ;;
+            *)
+                echo -n "unsupported linux package manager"
+                ;;
+            esac
             ;;
-
-        fedora|rhel|centos)
-            missingdepsinstall="sudo yum install"
-            ;;
-        arch)
-            missingdepsinstall="yay -S"
+        darwin)
+            missingdepsinstall="brew install"
             ;;
         *)
-            echo -n "unsupported linux package manager"
+            echo -n "unsupported OS"
             ;;
-        esac
-    ;;
-
-    darwin)
-        missingdepsinstall="brew install"
-    ;;
-
-    *)
-        echo -n "unsupported OS"
-        ;;
     esac
 
     for dep in "${deps[@]}"; do
